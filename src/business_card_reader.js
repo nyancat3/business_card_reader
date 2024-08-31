@@ -1,8 +1,10 @@
 function myFunction() {
-  const geminiApiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  // Please set a Google Drive file ID to BUSINESS_CARD_GOOGLE_DRIVE_FILE_ID in the Script Properties.
+  // https://drive.google.com/file/d/[Google Drive file ID]/view
   const businessCardGoogleDriveFileId = PropertiesService.getScriptProperties().getProperty('BUSINESS_CARD_GOOGLE_DRIVE_FILE_ID');
   const businessCardFile = DriveApp.getFileById(businessCardGoogleDriveFileId);
   const base64Data = Utilities.base64Encode(businessCardFile.getBlob().getBytes());
+  const geminiApiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
   const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
   const payload = {
     'contents': [
