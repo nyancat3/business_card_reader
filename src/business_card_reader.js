@@ -15,16 +15,15 @@ function main() {
     }
 
     // Extract text from the image
-    const json = extractTextFromImage(businessCardFile);
+    const json = extractTextFromImageWithOpenAi(businessCardFile);
     if (!json) {
       console.log('No JSON data extracted from the image.');
       continue;
     }
 
     // Append the extracted data to the Google Sheets
-    for (let i = 0; i < json.length; i++) {
-      appendDataToSheet(json[i]);
-    }
+    const dataSource = json.hasOwnProperty('business_cards') ? json.business_cards : json;
+    dataSource.forEach(card => appendDataToSheet(card));
 
     // Move the processed file to the done folder
     businessCardFile.moveTo(DriveApp.getFolderById(doneGoogleDriveFolderId));

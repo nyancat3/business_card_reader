@@ -1,4 +1,4 @@
-function extractTextFromImage(imageFile) {
+function extractTextFromImageWithGemini(imageFile) {
   const base64Data = Utilities.base64Encode(imageFile.getBlob().getBytes());
   const geminiApiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
   const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
@@ -13,26 +13,28 @@ function extractTextFromImage(imageFile) {
               'The image may contain multiple business cards, so please extract the details for each card separately.\n' +
               'The example below shows the expected JSON output format. Do not include "\\n" or "+" in the JSON output.\n' +
               '```json\n' +
-              '[\n' +
-              '  {\n' +
-              '    "name": "山田 太郎",\n' +
-              '    "company": "Google",\n' +
-              '    "department": "Engineering",\n' +
-              '    "postcode": "〒513-1234",\n' +
-              '    "address": "三重県鈴鹿市一ノ瀬町1111-2ファーストビル1F 1A",\n' +
-              '    "phone": "650-253-0000",\n' +
-              '    "email": "example@gmail.com"\n' +
-              '  },\n' +
-              '  {\n' +
-              '    "name": "高橋 花子",\n' +
-              '    "company": "Apple",\n' +
-              '    "department": "Design",\n' +
-              '    "postcode": "〒111-1111",\n' +
-              '    "address": "東京都文京区11-11-11",\n' +
-              '    "phone": "408-996-1010",\n' +
-              '    "email": "example@gmail.com"\n' +
-              '  }\n' +
-              ']\n' +
+              '{\n' +
+              '  "business_cards": [\n' +
+              '    {\n' +
+              '      "name": "山田 太郎",\n' +
+              '      "company": "Google",\n' +
+              '      "department": "Engineering",\n' +
+              '      "postcode": "〒513-1234",\n' +
+              '      "address": "三重県鈴鹿市一ノ瀬町1111-2ファーストビル1F 1A",\n' +
+              '      "phone": "650-253-0000",\n' +
+              '      "email": "example@gmail.com"\n' +
+              '    },\n' +
+              '    {\n' +
+              '      "name": "高橋 花子",\n' +
+              '      "company": "Apple",\n' +
+              '      "department": "Design",\n' +
+              '      "postcode": "〒111-1111",\n' +
+              '      "address": "東京都文京区11-11-11",\n' +
+              '      "phone": "408-996-1010",\n' +
+              '      "email": "example@gmail.com"\n' +
+              '    }\n' +
+              '  ]\n' +
+              '}\n' +
               '```\n'
           },
           {
