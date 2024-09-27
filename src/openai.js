@@ -50,7 +50,7 @@ function extractTextFromImageWithOpenAi(imageFile) {
         ]
       }
     ],
-    max_tokens: 300,
+    max_tokens: 10000,
     response_format: { "type": "json_object" }
   };
   const request = {
