@@ -4,7 +4,7 @@ function extractTextFromImageWithOpenAi(imageFile) {
   const chatGptApiUrl = 'https://api.openai.com/v1/chat/completions';
   const prompt = 'Please analyze the attached image of a business card / business cards and extract all relevant information.\n' +
     'Output the extracted details in a structured JSON format, including fields such as ' +
-    'name, company, department, postcode, address, phone, and email.\n' +
+    'name, company, department, title, postcode, address, phone, and email. The title can be empty.\n' +
     'The image may contain multiple business cards, so please extract the details for each card separately.\n' +
     'The example below shows the expected JSON output format. Do not include "\\n" or "+" in the JSON output.\n' +
     '```json\n' +
@@ -14,6 +14,7 @@ function extractTextFromImageWithOpenAi(imageFile) {
     '      "name": "山田 太郎",\n' +
     '      "company": "Google",\n' +
     '      "department": "Engineering",\n' +
+    '      "title": "部長",\n' +
     '      "postcode": "〒513-1234",\n' +
     '      "address": "三重県鈴鹿市一ノ瀬町1111-2ファーストビル1F 1A",\n' +
     '      "phone": "650-253-0000",\n' +
@@ -23,6 +24,7 @@ function extractTextFromImageWithOpenAi(imageFile) {
     '      "name": "高橋 花子",\n' +
     '      "company": "Apple",\n' +
     '      "department": "Design",\n' +
+    '      "title": "課長代理",\n' +
     '      "postcode": "〒111-1111",\n' +
     '      "address": "東京都文京区11-11-11",\n' +
     '      "phone": "408-996-1010",\n' +
